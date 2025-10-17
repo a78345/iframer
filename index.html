@@ -3,9 +3,28 @@
 <head>
 <meta charset="UTF-8" />
 <title>IFrame</title>
+<script type="text/javascript">
+function toggleFullscreen(element) {
+  if (!document.fullscreenElement) {
+    // If not in fullscreen, request fullscreen
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+      /* Safari */
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      /* IE11 */
+      element.msRequestFullscreen();
+    }
+  } else {
+    // If in fullscreen, exit fullscreen
+    document.exitFullscreen();
+  }
+}
+</script>
 </head>
 <body style="height:100vh;margin:0;padding:0;">
-<p style="margin:0.25%;">Website:&nbsp;<input id="only-in-ohio" type="text" value="" />&nbsp;<button onclick="if(document.getElementById('only-in-ohio').value.startsWith('https://')||document.getElementById('only-in-ohio').value.startsWith('HTTPS://')||document.getElementById('only-in-ohio').value.startsWith('http://')||document.getElementById('only-in-ohio').value.startsWith('HTTP://')||document.getElementById('only-in-ohio').value.startsWith('data:')||document.getElementById('only-in-ohio').value.startsWith('DATA:')){document.getElementById('websitehere').src=document.getElementById('only-in-ohio').value;}else{window.alert('You need to begin the URL with https:// , http:// , or data: .')}">Load</button></p>
-<iframe id="websitehere" height="90%" width="100%" src="about:blank"></iframe>
+<p style="margin:0.25%;">Website:&nbsp;<input id="only-in-ohio" type="text" value="" />&nbsp;<button onclick="if(document.getElementById('only-in-ohio').value.startsWith('https://')||document.getElementById('only-in-ohio').value.startsWith('HTTPS://')||document.getElementById('only-in-ohio').value.startsWith('http://')||document.getElementById('only-in-ohio').value.startsWith('HTTP://')||document.getElementById('only-in-ohio').value.startsWith('data:')||document.getElementById('only-in-ohio').value.startsWith('DATA:')){document.getElementById('websitehere').src=document.getElementById('only-in-ohio').value;}else{window.alert('You need to begin the URL with https:// , http:// , or data: .')}">Load</button>&nbsp;<button onclick="toggleFullscreen(document.getElementById('websitehere'));">Fullscreen</button></p>
+<iframe id="websitehere" allowfullscreen="" height="90%" width="100%" src="about:blank"></iframe>
 </body>
 </html>
