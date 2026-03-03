@@ -26,7 +26,23 @@ function toggleFullscreen(element) {
 <body style="height:100vh;margin:0;padding:0;">
 <h1 id="betterNoScript">Ha ha you don't have good enough JS you lose</h1>
 <script type="text/javascript">document.getElementById("betterNoScript").style.display="none";</script>
-<p style="margin:0.25%;">Website:&nbsp;<input id="only-in-ohio" type="text" value="" />&nbsp;<button onclick="if(document.getElementById('only-in-ohio').value.startsWith('https://')||document.getElementById('only-in-ohio').value.startsWith('HTTPS://')||document.getElementById('only-in-ohio').value.startsWith('http://')||document.getElementById('only-in-ohio').value.startsWith('HTTP://')||document.getElementById('only-in-ohio').value.startsWith('data:')||document.getElementById('only-in-ohio').value.startsWith('DATA:')){document.getElementById('websitehere').src=document.getElementById('only-in-ohio').value;}else{window.alert('You need to begin the URL with https:// , http:// , or data: .')}">Load</button>&nbsp;<button onclick="toggleFullscreen(document.getElementById('websitehere'));">Fullscreen</button></p>
+<p style="margin:0.25%;">Website:&nbsp;<input id="only-in-ohio" type="text" value="" />&nbsp;<button onclick="if(document.getElementById('only-in-ohio').value.startsWith('https://')||document.getElementById('only-in-ohio').value.startsWith('HTTPS://')||document.getElementById('only-in-ohio').value.startsWith('http://')||document.getElementById('only-in-ohio').value.startsWith('HTTP://')||document.getElementById('only-in-ohio').value.startsWith('data:')||document.getElementById('only-in-ohio').value.startsWith('DATA:')){document.getElementById('websitehere').src=document.getElementById('only-in-ohio').value;}else{window.alert('You need to begin the URL with https:// , http:// , or data: .')}">Load</button>&nbsp;<button onclick="toggleFullscreen(document.getElementById('websitehere'));">Fullscreen</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="openFileAsBlob()">Open File in IFrame:</button> <input type="file" id="fileInput" /></p>
 <iframe id="websitehere" allowfullscreen="" style="height:90%;width:100%;" src="data:text/html,This%20is%20the%20homepage."></iframe>
+<script type="text/javascript">
+var fileOpener=document.getElementById("fileInput");
+function openFileAsBlob(){
+if (fileOpener.files && fileOpener.files.length > 0) {
+var file = fileOpener.files[0];
+if (document.getElementById("websitehere").src.startsWith("blob:")) {
+URL.revokeObjectURL(document.getElementById("websitehere").src);
+}
+var objURL = URL.createObjectURL(file);
+document.getElementById("websitehere").src=objURL
+} else {
+window.alert("Go select a file first you idiot.");
+console.error("Go select a file first you idiot.");
+}
+}
+</script>
 </body>
 </html>
